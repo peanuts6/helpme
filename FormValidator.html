@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8" />
+	<meta name="keyword" content="" />
+	<meta name="description" content="" />
+	<title>Form validator</title>
+	<link rel="stylesheet" type="text/css" href="styles/form.css" media="screen" />
+	<script type="text/javascript" src="vendor/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="scripts/FormValidator.js"></script>
+</head>
+<body>
+	<header>
+		<div class="header-box">
+		</div>
+	</header>
+	<div class="container ac">
+		<div class="form-box">
+			<div class="form-title">
+				<strong>表单验证</strong>
+				<span>没有form表单的</span>
+			</div>
+			<ul id="form1">
+				<li class="tab_regtype">
+					<label>手机号码：</label>
+					<div class="dsib">
+						<input type="text" name="mobilePhone" id="mobilePhone" class="input" rules="mobilePhone" />
+					</div>
+				</li>
+				<li class="tab_regtype">
+					<label>电子邮箱：</label>
+					<div class="dsib">
+						<input type="text" name="email" id="email" class="input" rules="email" />
+					</div>
+				</li>
+				<li>
+					<label>密码设置：</label>
+					<div class="dsib"><input type="password" name="password" id="password" class="input" rules="password" refId="password2" /></div>
+				</li>
+				<li>
+					<label>密码确认：</label>
+					<div class="dsib"><input type="password" name="confirmPwd" id="password2" class="input" rules="password2" refId="password" /></div>
+				</li>
+				<li>
+					<label>&nbsp;</label>
+					<div class="dsib"><input type="button" value="提交" id="btn-submit" class="btn btn-red btn-lg btn-l" /></div>
+				</li>
+			</ul>
+
+			<div class="form-title">
+				<strong>表单验证2</strong>
+				<span id="tipbox"></span>
+			</div>
+			<form id="form2" method="post">
+			<ul>
+				<li>
+					<label>用户名：</label>
+					<div class="dsib">
+						<input type="text" name="userName" id="userName" class="input" rules="nonEmpty" />
+					</div>
+				</li>
+				<li>
+					<label>昵称：</label>
+					<div class="dsib"><input type="text" name="nickName" id="nickName" class="input" rules="empty,chinese" /></div>
+				</li>
+				<li>
+					<label>身份证：</label>
+					<div class="dsib"><input type="text" name="idcard" id="idcard" class="input" rules="idcard" /></div>
+				</li>
+				<li>
+					<label>年龄：</label>
+					<div class="dsib">
+						<input type="text" name="age" id="age" class="input" rules="number" />
+					</div>
+				</li>
+				<li>
+					<label>爱好：</label>
+					<div class="dsib"><input type="text" name="liklyhood" id="liklyhood" class="input" rules="charRange" min="3" max="30" /></div>
+				</li>
+				<li>
+					<label>电话号码：</label>
+					<div class="dsib"><input type="text" name="tel" id="tel" class="input" rules="phoneNumber" /></div>
+				</li>
+				<li>
+					<label>&nbsp;</label>
+					<div class="dsib"><input type="submit" value="提交" id="btn-submit2" class="btn btn-red btn-lg btn-l" /></div>
+				</li>
+			</ul>
+		</form>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			var validator1 = new FormValidate({formID:"#form1"});
+			$("#btn-submit").on("click",function(e){
+				validator1.blur();
+				if(!validator1.isValid()){
+					e.preventDefault();
+					return false;
+				}
+			});
+
+			var validator2 = new FormValidate({formID:"#form2",tipbox:"#tipbox"});
+			$("#btn-submit2").on("click",function(e){
+				validator2.blur();
+				if(!validator2.isValid()){
+					e.preventDefault();
+					return false;
+				}
+			});
+		});
+	</script>
+</body>
+</html>
